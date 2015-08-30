@@ -4,6 +4,7 @@ var BrowserWindow = require('browser-window') // Module to create native browser
 var assert = require('assert')
 var fs = require('fs')
 var child_process = require('child_process')
+var ipc = require('ipc')
 
 // Report crashes to our server.
 require('crash-reporter').start();
@@ -56,6 +57,16 @@ app.on('ready', function() {
 	mainWindow = new BrowserWindow({
 		width: 800,
 		height: 600
+	});
+
+	ipc.on('asynchronous-message', function(event, arg) {
+		console.log(arg); // prints "ping"
+		event.sender.send('asynchronous-reply', 'pong');
+	});
+
+	ipc.on('synchronous-message', function(event, arg) {
+		console.log(arg); // prints "ping"
+		event.returnValue = 'pong';
 	});
 
 	// and load the index.html of the app.
