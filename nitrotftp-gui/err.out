@@ -1,0 +1,2 @@
+time="2015-08-30T14:53:49-07:00" level=info msg="listen udp4 0.0.0.0:69: bind: permission denied" 
+time="2015-08-30T14:57:56-07:00" level=info msg="Caught Signal interrupt" 
