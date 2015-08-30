@@ -2,32 +2,32 @@
 <html>
 
 <head>
-	<title>Hello World!</title>
+	<title>Nitro TFTP</title>
 </head>
 
 <body>
-	<h1>Hello Worl!</h1>
-	We are using io.js
+	<h1>NitroTFTP UI</h1>
+	<p>
+		Make running a TFTP server as simple as clicking a button!
+</p>
+	<button onclick="startServer()">Start</button>
+	<button onclick="stopServer()">Stop</button>
 	<script>
-		document.write(process.version)
+		var ipc = require('ipc');
+
+		var startServer = function() {
+			ipc.send('synchronous-message', 'start');
+		}
+
+		var stopServer = function() {
+			ipc.send('synchronous-message', 'stop');
+		}
+
+		ipc.on('asynchronous-reply', function(arg) {
+			console.log(arg); // prints "pong"
+		});
 	</script>
-	and Electron
-	<script>
-		document.write(process.versions['electron'])
-	</script>.
-	<button onclick="ping()">Ping</button>
+
 </body>
-<script>
-	var ipc = require('ipc');
-	console.log(ipc.sendSync('synchronous-message', 'ping')); // prints "pong"
-
-	ipc.on('asynchronous-reply', function(arg) {
-		console.log(arg); // prints "pong"
-	});
-
-	var ping = function() {
-		ipc.send('asynchronous-message', 'ping');
-	}
-</script>
 
 </html>

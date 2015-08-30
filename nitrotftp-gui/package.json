@@ -1,5 +1,15 @@
 {
-  "name"    : "NitroTFTP UI",
-  "version" : "0.1.0",
-  "main"    : "main.js"
+	"name": "NitroTFTP-UI",
+	"version": "0.12.1",
+	"main": "main.js",
+	"author": "Rob Cameron",
+	"license": "Apache",
+	"repository": "https://github.com/RobWC/nitro-tftp-ui",
+	"keywords": [
+		"nitrotftp",
+		"tftp"
+	],
+	"dependencies": {
+		"angular": "github:angular/bower-angular@^1.3.15"
+	}
 }
