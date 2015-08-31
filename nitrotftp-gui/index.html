@@ -9,11 +9,12 @@
 	<h1>NitroTFTP UI</h1>
 	<p>
 		Make running a TFTP server as simple as clicking a button!
-</p>
+	</p>
 	<button onclick="startServer()">Start</button>
 	<button onclick="stopServer()">Stop</button>
 	<script>
 		var ipc = require('ipc');
+		var Config = require('./config.js').Config;
 
 		var startServer = function() {
 			ipc.send('synchronous-message', 'start');
@@ -26,8 +27,10 @@
 		ipc.on('asynchronous-reply', function(arg) {
 			console.log(arg); // prints "pong"
 		});
+
+		ipc.on('synchronous-reply', function(arg) {
+			console.log(arg); // prints "pong"
+		});
 	</script>
-
 </body>
-
 </html>

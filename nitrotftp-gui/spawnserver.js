@@ -4,7 +4,7 @@ exports.SpawnServer = function() {
 	this.running = false;
 }
 
-exports.SpawnServer.prototype.start = function() {
+exports.SpawnServer.prototype.start = function(cfg) {
 	var self = this;
 	if (!self.running) {
 		self.child = child_process.spawn('./bin/nitro-tftp_linux_amd64', ['-config', './etc/nitrotftp.json']);
@@ -23,7 +23,7 @@ exports.SpawnServer.prototype.start = function() {
 			console.log('child process exited with code ' + code);
 		});
 	} else {
-		console.log("Server already running")
+		console.log("Server already running");
 	}
 }
 
