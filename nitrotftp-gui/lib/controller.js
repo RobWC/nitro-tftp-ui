@@ -1,5 +1,24 @@
-var myApp = angular.module("app", ["chart.js","ngMaterial"]);
-	// Optional configuration
+var ipc = require('ipc');
+var Config = require('./config.js').Config;
+
+var startServer = function() {
+	ipc.send('synchronous-message', 'start');
+}
+
+var stopServer = function() {
+	ipc.send('synchronous-message', 'stop');
+}
+
+ipc.on('asynchronous-reply', function(arg) {
+	console.log(arg); // prints "pong"
+});
+
+ipc.on('synchronous-reply', function(arg) {
+	console.log(arg); // prints "pong"
+});
+
+var myApp = angular.module("app", ["chart.js", "ngMaterial"]);
+// Optional configuration
 myApp.config(['ChartJsProvider', function(ChartJsProvider) {
 	// Configure all charts
 	ChartJsProvider.setOptions({
@@ -32,9 +51,30 @@ myApp.controller("LineCtrl", ['$scope', '$timeout', function($scope, $timeout) {
 	}, 3000);
 }]);
 
-myApp.controller('AppCtrl', function($scope) {
-  $scope.title1 = 'Button';
-  $scope.title4 = 'Warn';
-  $scope.isDisabled = true;
-  $scope.googleUrl = 'http://google.com';
+myApp.controller('StatsCall', function($scope,$http) {
+	$scope.data = {
+		totalbytessent: 1,
+		totalbytesrecv: 1
+	}
+	$scope.statsClick = function() {
+		$http.get("http://127.0.0.1:16969/api/v1/stats/all").then(function(resp) {
+			console.log(resp.data);
+			$scope.data.totalbytessent = resp.data.totalbytessent;
+			$scope.data.totalbytesrecv = resp.data.totalbytessent;
+		});
+	}
+});
+
+myApp.controller('SwitchDemoCtrl', function($scope) {
+	$scope.data = {
+		stateoff: "Off",
+		stateon: "On",
+	};
+	$scope.onChange = function(cbState) {
+		if (cbState === $scope.data.stateon) {
+			ipc.send('synchronous-message', 'start');
+		} else if (cbState === $scope.data.stateoff) {
+			ipc.send('synchronous-message', 'stop');
+		}
+	};
 });

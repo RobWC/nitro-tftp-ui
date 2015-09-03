@@ -18,43 +18,19 @@
 		div {
 			padding-left: 10px;
 		}
-
-		.buttondemoBasicUsage section {
-			background: #f7f7f7;
-			border-radius: 3px;
-			text-align: center;
-			margin: 1em;
-			position: relative !important;
-			padding-bottom: 10px;
-		}
-
-		.buttondemoBasicUsage md-content {
-			margin-right: 7px;
-		}
-
-		.buttondemoBasicUsage section .md-button {
-			margin-top: 16px;
-			margin-bottom: 16px;
-		}
-
-		.buttondemoBasicUsage .label {
-			position: absolute;
-			bottom: 5px;
-			left: 7px;
-			font-size: 14px;
-			opacity: 0.54;
-		}
 	</style>
 </head>
 
 <body ng-app="app">
 	<md-content>
 		<section layout="row" layout-align="center center" layout-wrap>
-			<h1>NitroTFTP UI</h1>
-			<md-button class="md-raised md-warn" onclick="stopServer()">Stopped</md-button>
+			<h1 class="md-display-1">NitroTFTP UI</h1>
+			<div class="inset" ng-controller="SwitchDemoCtrl">
+				<md-switch ng-model="data.stateoff" ng-change="onChange(data.stateoff)" ng-false-value="'Off'" ng-true-value="'On'" aria-label="Status">Status: {{ data.stateoff }}</md-switch>
+			</div>
 		</section>
 	</md-content>
-	<p>
+	<p class="md-body-1">
 		Make running a TFTP server as simple as clicking a button!
 	</p>
 	<script source src="bower_components/angular/angular.js" type="application/javascript"></script>
@@ -64,46 +40,29 @@
 	<script src="bower_components/Chart.js/Chart.min.js"></script>
 	<script src="bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
 	<script source src="lib/controller.js" type="application/javascript"></script>
-	<script>
-		var ipc = require('ipc');
-		var Config = require('./config.js').Config;
-
-		var startServer = function() {
-			ipc.send('synchronous-message', 'start');
-		}
-
-		var stopServer = function() {
-			ipc.send('synchronous-message', 'stop');
-		}
-
-		ipc.on('asynchronous-reply', function(arg) {
-			console.log(arg); // prints "pong"
-		});
-
-		ipc.on('synchronous-reply', function(arg) {
-			console.log(arg); // prints "pong"
-		});
-	</script>
-	<div ng-controller="AppCtrl">
+	<div ng-controller="LineCtrl">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 col-sm-12">
 					<div class="panel panel-default">
 						<div class="panel-heading">Example</div>
-						<div class="panel-body" ng-controller="LineCtrl">
+						<div class="panel-body">
 							<canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="true" chart-series="series" chart-click="onClick"></canvas>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<md-content>
-			<section layout="row" layout-align="center center" layout-wrap>
-				<md-button class="md-raised" onclick="startServer()">Start</md-button>
-				<md-button class="md-raised" onclick="stopServer()">Stop</md-button>
-			</section>
-		</md-content>
 	</div>
+	<md-content>
+		<div ng-controller="StatsCall">
+			<md-button ng-click="statsClick()" class="md-raised md-primary">GetStats</md-button>
+			<p class="md-body-1">
+				Bytes Sent: {{ data.totalbytessent}} <br>
+				Bytes Received: {{ data.totalbytesrecv }}
+			</p>
+		</div>
+	</md-content>
 </body>
 
 </html>

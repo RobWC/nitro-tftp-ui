@@ -6,8 +6,9 @@ exports.SpawnServer = function() {
 
 exports.SpawnServer.prototype.start = function(cfg) {
 	var self = this;
+	console.log(self.running)
 	if (!self.running) {
-		self.child = child_process.spawn('./bin/nitro-tftp_linux_amd64', ['-config', './etc/nitrotftp.json']);
+		self.child = child_process.spawn('bin/nitro-tftp_linux_amd64', ['-config', 'etc/nitrotftp.json']);
 		self.running = true;
 		self.child.stdout.on('data', function(data) {
 			console.log('stdout: ' + data);
