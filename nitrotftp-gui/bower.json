@@ -1,0 +1,24 @@
+{
+  "name": "nitrotftp-gui",
+  "version": "0.0.0",
+  "homepage": "https://github.com/RobWC/nitro-tftp-ui",
+  "authors": [
+    "Rob Cameron <rwcameron@gmail.com>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.5",
+    "angular-chart.js": "~0.8.1",
+    "angular-material": "~0.10.1"
+  }
+}

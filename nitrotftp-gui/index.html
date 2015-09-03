@@ -3,15 +3,67 @@
 
 <head>
 	<title>Nitro TFTP</title>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css">
+	<link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+	<style>
+		h1 {
+			padding-left: 10px;
+		}
+
+		p {
+			padding-left: 10px;
+		}
+
+		div {
+			padding-left: 10px;
+		}
+
+		.buttondemoBasicUsage section {
+			background: #f7f7f7;
+			border-radius: 3px;
+			text-align: center;
+			margin: 1em;
+			position: relative !important;
+			padding-bottom: 10px;
+		}
+
+		.buttondemoBasicUsage md-content {
+			margin-right: 7px;
+		}
+
+		.buttondemoBasicUsage section .md-button {
+			margin-top: 16px;
+			margin-bottom: 16px;
+		}
+
+		.buttondemoBasicUsage .label {
+			position: absolute;
+			bottom: 5px;
+			left: 7px;
+			font-size: 14px;
+			opacity: 0.54;
+		}
+	</style>
 </head>
 
-<body>
-	<h1>NitroTFTP UI</h1>
+<body ng-app="app">
+	<md-content>
+		<section layout="row" layout-align="center center" layout-wrap>
+			<h1>NitroTFTP UI</h1>
+			<md-button class="md-raised md-warn" onclick="stopServer()">Stopped</md-button>
+		</section>
+	</md-content>
 	<p>
 		Make running a TFTP server as simple as clicking a button!
 	</p>
-	<button onclick="startServer()">Start</button>
-	<button onclick="stopServer()">Stop</button>
+	<script source src="bower_components/angular/angular.js" type="application/javascript"></script>
+	<script src="bower_components/angular-aria/angular-aria.js"></script>
+	<script src="bower_components/angular-animate/angular-animate.js"></script>
+	<script src="bower_components/angular-material/angular-material.js"></script>
+	<script src="bower_components/Chart.js/Chart.min.js"></script>
+	<script src="bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
+	<script source src="lib/controller.js" type="application/javascript"></script>
 	<script>
 		var ipc = require('ipc');
 		var Config = require('./config.js').Config;
@@ -32,5 +84,26 @@
 			console.log(arg); // prints "pong"
 		});
 	</script>
+	<div ng-controller="AppCtrl">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-sm-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">Example</div>
+						<div class="panel-body" ng-controller="LineCtrl">
+							<canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="true" chart-series="series" chart-click="onClick"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<md-content>
+			<section layout="row" layout-align="center center" layout-wrap>
+				<md-button class="md-raised" onclick="startServer()">Start</md-button>
+				<md-button class="md-raised" onclick="stopServer()">Stop</md-button>
+			</section>
+		</md-content>
+	</div>
 </body>
+
 </html>
