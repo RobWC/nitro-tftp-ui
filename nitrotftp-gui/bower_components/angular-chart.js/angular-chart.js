@@ -1,11 +1,11 @@
 (function (factory) {
   'use strict';
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['angular', 'chart'], factory);
-  } else if (typeof exports === 'object') {
+  if (typeof exports === 'object') {
     // Node/CommonJS
     module.exports = factory(require('angular'), require('chart.js'));
+  }  else if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['angular', 'chart'], factory);
   } else {
     // Browser globals
     factory(angular, Chart);
@@ -180,7 +180,7 @@
             if (isResponsive(type, scope) && elem[0].clientHeight === 0 && container.clientHeight === 0) {
               return $timeout(function () {
                 createChart(type);
-              }, 50);
+              }, 50, false);
             }
             if (! scope.data || ! scope.data.length) return;
             scope.getColour = typeof scope.getColour === 'function' ? scope.getColour : getRandomColour;
