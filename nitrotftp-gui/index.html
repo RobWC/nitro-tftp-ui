@@ -26,7 +26,7 @@
 		<section layout="row" layout-align="center center" layout-wrap>
 			<h1 class="md-display-1">NitroTFTP UI</h1>
 			<div class="inset" ng-controller="SwitchDemoCtrl">
-				<md-switch ng-model="data.stateoff" ng-change="onChange(data.stateoff)" ng-false-value="'Off'" ng-true-value="'On'" aria-label="Status">Status: {{ data.stateoff }}</md-switch>
+				<md-switch ng-model="data.state" ng-change="onChange(data.state)" ng-false-value="'Off'" ng-true-value="'On'" aria-label="Status">Status: {{ data.state }}</md-switch>
 			</div>
 		</section>
 	</md-content>
@@ -45,7 +45,7 @@
 			<div class="row">
 				<div class="col-lg-6 col-sm-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">Example</div>
+						<div class="panel-heading">Bytes Sent/Received</div>
 						<div class="panel-body">
 							<canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels"></canvas>
 						</div>

@@ -13,10 +13,10 @@ var SpawnServer = require('./spawnserver.js').SpawnServer;
 var mainWindow = null;
 
 crashReporter.start({
-  productName: 'NitroTFTP-UI',
-  companyName: 'Rob Cameron',
-  submitUrl: 'http://localhost:3000/',
-  autoSubmit: true
+	productName: 'NitroTFTP-UI',
+	companyName: 'Rob Cameron',
+	submitUrl: 'http://localhost:3000/',
+	autoSubmit: true
 });
 
 // Quit when all windows are closed.
@@ -24,7 +24,7 @@ app.on('window-all-closed', function() {
 	// On OS X it is common for applications and their menu bar
 	// to stay active until the user quits explicitly with Cmd + Q
 	if (process.platform != 'darwin') {
-        ss.stop();
+		ss.stop();
 		app.quit();
 	}
 });
@@ -53,7 +53,9 @@ app.on('ready', function() {
 		} else if (arg === "stop") {
 			ss.stop();
 			event.returnValue = 'Stopped';
-		}
+		} else if (arg == "status") {
+			event.returnValue  = ss.status();
+		};
 		console.log(arg); // prints "ping"
 	});
 

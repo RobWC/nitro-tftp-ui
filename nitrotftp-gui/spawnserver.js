@@ -28,8 +28,15 @@ exports.SpawnServer.prototype.start = function(cfg) {
 	}
 }
 
-exports.SpawnServer.prototype.stop = function(argument) {
+exports.SpawnServer.prototype.stop = function() {
+	var self = this;
+	if (self.child != undefined) {
+		self.child.kill('SIGTERM');
+	}
+}
+
+exports.SpawnServer.prototype.status = function() {
 	var self = this;
 	// body...
-	self.child.kill('SIGTERM');
+	return self.running;
 }
