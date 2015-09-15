@@ -36,6 +36,12 @@ myApp.controller('BytesTotalCtrl', function($scope,$http) {
 
 });
 
+myApp.controller('CurConnsCtrl',function($scope){
+	$scope.data = {
+		conns: 0
+	};
+});
+
 myApp.controller('SwitchDemoCtrl', function($scope) {
 	$scope.data = {
 		stateoff: "Off",

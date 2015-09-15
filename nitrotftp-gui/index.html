@@ -18,21 +18,48 @@
 		div {
 			padding-left: 10px;
 		}
+
+		.spacer {
+			padding: 10px;
+		}
 	</style>
 </head>
 
 <body ng-app="app">
-	<md-content>
-		<section layout="row" layout-align="center center" layout-wrap>
-			<h1 class="md-display-1">NitroTFTP UI</h1>
-			<div class="inset" ng-controller="SwitchDemoCtrl">
-				<md-switch ng-model="data.state" ng-change="onChange(data.state)" ng-false-value="'Off'" ng-true-value="'On'" aria-label="Status">Status: {{ data.state }}</md-switch>
+	<div>
+		<md-content class="md-whiteframe-z5" layout="row" layout-align="center center" layout-wrap layout-padding>
+			<div layout-align="center center"><p>Logo Here</p></div>
+			<div layout="column" layout-align="center center">
+				<h1 class="md-display-1">NitroTFTP UI</h1>
+				<div ng-controller="SwitchDemoCtrl">
+					<md-switch ng-model="data.state" ng-change="onChange(data.state)" ng-false-value="'Off'" ng-true-value="'On'" aria-label="Status">Status: {{ data.state }}</md-switch>
+				</div>
+				<p class="md-body-1">
+					Make running a TFTP server as simple as clicking a button!
+				</p>
 			</div>
-		</section>
-	</md-content>
-	<p class="md-body-1">
-		Make running a TFTP server as simple as clicking a button!
-	</p>
+			<div layout-align="center center" ng-controller="CurConnsCtrl"><p>Current Connections: {{ data.conns }}</p></div>
+		</md-content>
+	</div>
+	<div class="spacer">
+
+	</div>
+	<div>
+		<md-content class="md-whiteframe-z5">
+			<md-tabs md-dynamic-height md-border-bottom>
+				<md-tab label="Bytes Sent/Received">
+					<md-content class="md-padding" ng-controller="BytesTotalCtrl">
+						<canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels"></canvas>
+					</md-content>
+				</md-tab>
+				<md-tab label="Client Stats">
+					<md-content class="md-padding">
+						<canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels"></canvas>
+					</md-content>
+				</md-tab>
+			</md-tabs>
+		</md-content>
+	</div>
 	<script source src="bower_components/angular/angular.js" type="application/javascript"></script>
 	<script src="bower_components/angular-aria/angular-aria.js"></script>
 	<script src="bower_components/angular-animate/angular-animate.js"></script>
@@ -40,20 +67,6 @@
 	<script src="bower_components/Chart.js/Chart.min.js"></script>
 	<script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
 	<script source src="lib/controller.js" type="application/javascript"></script>
-	<div ng-controller="BytesTotalCtrl">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 col-sm-12">
-					<div class="panel panel-default">
-						<div class="panel-heading">Bytes Sent/Received</div>
-						<div class="panel-body">
-							<canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels"></canvas>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 </body>
 
 </html>
